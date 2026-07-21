@@ -26,7 +26,41 @@
     color: var(--text);
     line-height: 1.7;
     overflow-x: hidden;
+    position: relative;
   }
+
+  /* AMBIENT BACKGROUND */
+  .aurora { position: fixed; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; }
+  .aurora span {
+    position: absolute; border-radius: 50%;
+    filter: blur(90px); opacity: 0.35;
+    animation: drift 22s ease-in-out infinite;
+  }
+  .aurora .a1 { width: 480px; height: 480px; background: var(--accent); top: -10%; left: -8%; animation-delay: 0s; }
+  .aurora .a2 { width: 420px; height: 420px; background: var(--teal); top: 40%; right: -12%; animation-delay: -7s; }
+  .aurora .a3 { width: 380px; height: 380px; background: var(--accent2); bottom: -15%; left: 20%; animation-delay: -14s; }
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(40px, -30px) scale(1.12); }
+    66% { transform: translate(-30px, 25px) scale(0.94); }
+  }
+  .grain { position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 3px 3px;
+  }
+  .spotlight {
+    position: fixed; top: 0; left: 0; width: 500px; height: 500px;
+    border-radius: 50%; pointer-events: none; z-index: 0;
+    background: radial-gradient(circle, rgba(99,102,241,0.10) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s; opacity: 0;
+  }
+
+  /* SCROLL REVEAL */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-stagger.visible .stagger-child { opacity: 1; transform: translateY(0); }
+  .stagger-child { opacity: 0; transform: translateY(18px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
 
   /* NAV */
   nav {
@@ -44,7 +78,12 @@
   }
   .nav-logo span { color: var(--accent2); }
   .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; position: relative; padding-bottom: 2px; }
+  .nav-links a::after {
+    content: ''; position: absolute; left: 0; bottom: -3px; width: 0; height: 1px;
+    background: var(--accent2); transition: width 0.25s ease;
+  }
+  .nav-links a:hover::after { width: 100%; }
   .nav-links a:hover { color: var(--text); }
 
   /* HERO */
@@ -68,16 +107,34 @@
     font-weight: 700; line-height: 1.1; letter-spacing: -0.03em;
     margin-bottom: 1.25rem;
   }
-  h1 .line2 { color: var(--accent2); display: block; }
+  .gradient-text {
+    background: linear-gradient(90deg, var(--text) 0%, var(--accent2) 35%, var(--teal) 60%, var(--text) 100%);
+    background-size: 300% auto;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: shine 6s linear infinite;
+  }
+  @keyframes shine { to { background-position: -300% center; } }
+  h1 .line2 { color: var(--accent2); display: block; position: relative; }
+  .typed-cursor { display: inline-block; width: 3px; height: 0.85em; background: var(--accent2); margin-left: 4px; vertical-align: middle; animation: blink 0.9s step-end infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
   .hero-desc { font-size: 1.05rem; color: var(--muted); max-width: 480px; margin-bottom: 2rem; line-height: 1.75; }
   .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
   .btn-primary {
     padding: 0.75rem 1.75rem; background: var(--accent);
     color: #fff; border-radius: 8px; text-decoration: none;
-    font-weight: 600; font-size: 0.9rem; transition: opacity 0.2s, transform 0.15s;
+    font-weight: 600; font-size: 0.9rem; transition: opacity 0.2s, transform 0.15s, box-shadow 0.3s;
     display: inline-flex; align-items: center; gap: 0.4rem;
+    position: relative; overflow: hidden;
+    box-shadow: 0 0 0 rgba(99,102,241,0.5);
   }
-  .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-primary::before {
+    content: ''; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.35), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+  }
+  .btn-primary:hover::before { left: 130%; }
+  .btn-primary:hover { opacity: 0.95; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(99,102,241,0.35); }
   .btn-outline {
     padding: 0.75rem 1.75rem; background: transparent;
     color: var(--text); border: 1px solid var(--border);
@@ -130,6 +187,27 @@
   .badge2 { bottom: 50px; left: -20px; animation-delay: 1.5s; }
   @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 
+  /* STATS BAR */
+  .stats-bar {
+    max-width: 1100px; margin: 0 auto; padding: 0 2rem 4rem;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+  }
+  .stat-box {
+    text-align: center; padding: 1.25rem 0.5rem;
+    border-right: 1px solid var(--border);
+  }
+  .stat-box:last-child { border-right: none; }
+  .stat-number {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700;
+    color: var(--accent2); letter-spacing: -0.02em;
+  }
+  .stat-label { font-size: 0.75rem; color: var(--muted); margin-top: 0.3rem; letter-spacing: 0.03em; }
+  @media (max-width: 768px) {
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .stat-box:nth-child(2) { border-right: none; }
+  }
+
   /* SECTIONS */
   section { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
   .section-label {
@@ -154,7 +232,8 @@
     transition: border-color 0.2s, transform 0.2s;
   }
   .skill-card:hover { border-color: rgba(99,102,241,0.45); transform: translateY(-3px); }
-  .skill-icon { font-size: 1.6rem; margin-bottom: 0.75rem; }
+  .skill-icon { font-size: 1.6rem; margin-bottom: 0.75rem; display: inline-block; transition: transform 0.3s ease; }
+  .skill-card:hover .skill-icon { transform: scale(1.25) rotate(-6deg); }
   .skill-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem; font-weight: 600; margin-bottom: 0.6rem; }
   .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
   .tag {
@@ -164,13 +243,15 @@
   }
 
   /* PROJECTS */
-  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); gap: 1.5rem; }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); gap: 1.5rem; perspective: 1200px; }
   .project-card {
     background: var(--card); border: 1px solid var(--border);
     border-radius: 16px; overflow: hidden;
-    transition: border-color 0.2s, transform 0.2s;
+    transition: border-color 0.2s, transform 0.15s ease, box-shadow 0.3s;
+    transform-style: preserve-3d;
+    will-change: transform;
   }
-  .project-card:hover { border-color: rgba(99,102,241,0.45); transform: translateY(-4px); }
+  .project-card:hover { border-color: rgba(99,102,241,0.45); box-shadow: 0 20px 45px rgba(0,0,0,0.35), 0 0 30px rgba(99,102,241,0.12); }
   .project-banner {
     height: 140px;
     background: linear-gradient(135deg, rgba(99,102,241,0.18) 0%, rgba(20,184,166,0.12) 100%);
@@ -219,6 +300,15 @@
     position: absolute; left: -1.5rem; top: 6px;
     width: 9px; height: 9px; border-radius: 50%;
     background: var(--accent2); border: 2px solid var(--bg);
+  }
+  .exp-dot::after {
+    content: ''; position: absolute; inset: -6px; border-radius: 50%;
+    border: 1px solid var(--accent2); opacity: 0;
+    animation: pulse-ring 2.5s ease-out infinite;
+  }
+  @keyframes pulse-ring {
+    0% { transform: scale(0.6); opacity: 0.6; }
+    100% { transform: scale(1.8); opacity: 0; }
   }
   .exp-date { font-size: 0.75rem; color: var(--muted); font-weight: 500; margin-bottom: 0.3rem; }
   .exp-title { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; margin-bottom: 0.2rem; }
@@ -276,10 +366,15 @@
 </head>
 <body>
 
+<div class="aurora"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+<div class="grain"></div>
+<div class="spotlight" id="spotlight"></div>
+
 <nav>
   <a href="#" class="nav-logo">AH<span>.</span></a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -292,11 +387,11 @@
     <div>
       <div class="hero-eyebrow">Available for opportunities</div>
       <h1>
-        Ayesha Hassan
-        <span class="line2">Software Engineer</span>
+        <span class="gradient-text">Ayesha Hassan</span>
+        <span class="line2">Software Engineer<span class="typed-cursor"></span></span>
       </h1>
       <p class="hero-desc">
-        Computer Science graduate building full-stack web applications and AI-powered systems. Experienced with MERN stack, Python, MongoDB, and AWS — from responsive front-end interfaces to cloud-deployed backends.
+        Computer Science graduate building full-stack web applications and AI-powered systems. Currently a Machine Learning Engineering Intern at FlyRank AI, with hands-on experience across the MERN stack, Python, MongoDB, and AWS — from responsive front-end interfaces to cloud-deployed backends.
       </p>
       <div class="hero-ctas">
         <a href="#projects" class="btn-primary">View Projects ↓</a>
@@ -316,22 +411,29 @@
         </div>
         <div class="float-badge badge2">
           <div class="dot"></div>
-          Software Engineer
+          ML Intern @ FlyRank AI
         </div>
       </div>
     </div>
   </div>
 </div>
 
+<div class="stats-bar reveal-stagger">
+  <div class="stat-box stagger-child"><div class="stat-number" data-count="12">0</div><div class="stat-label">Month build cycle</div></div>
+  <div class="stat-box stagger-child"><div class="stat-number" data-count="99" data-suffix="%+">0</div><div class="stat-label">Uptime in testing</div></div>
+  <div class="stat-box stagger-child"><div class="stat-number" data-count="10000" data-suffix="+">0</div><div class="stat-label">Lines shipped</div></div>
+  <div class="stat-box stagger-child"><div class="stat-number" data-count="4">0</div><div class="stat-label">Core modules built</div></div>
+</div>
+
 <hr class="divider">
 
 <!-- SKILLS -->
-<section id="skills">
+<section id="skills" class="reveal">
   <div class="section-label">What I work with</div>
   <h2>Technical Skills</h2>
   <p class="section-intro">Focused on full-stack development and software engineering, with hands-on experience shipping production-grade applications.</p>
-  <div class="skills-grid">
-    <div class="skill-card">
+  <div class="skills-grid reveal-stagger">
+    <div class="skill-card stagger-child">
       <div class="skill-icon">🧠</div>
       <h3>AI / Machine Learning</h3>
       <div class="skill-tags">
@@ -342,7 +444,7 @@
         <span class="tag">Model Evaluation</span>
       </div>
     </div>
-    <div class="skill-card">
+    <div class="skill-card stagger-child">
       <div class="skill-icon">🐍</div>
       <h3>Languages</h3>
       <div class="skill-tags">
@@ -352,7 +454,7 @@
         <span class="tag">Java</span>
       </div>
     </div>
-    <div class="skill-card">
+    <div class="skill-card stagger-child">
       <div class="skill-icon">⚛️</div>
       <h3>Web Development</h3>
       <div class="skill-tags">
@@ -363,7 +465,7 @@
         <span class="tag">REST APIs</span>
       </div>
     </div>
-    <div class="skill-card">
+    <div class="skill-card stagger-child">
       <div class="skill-icon">☁️</div>
       <h3>Cloud & Database</h3>
       <div class="skill-tags">
@@ -374,7 +476,7 @@
         <span class="tag">Real-Time DB</span>
       </div>
     </div>
-    <div class="skill-card">
+    <div class="skill-card stagger-child">
       <div class="skill-icon">🛠️</div>
       <h3>Tools</h3>
       <div class="skill-tags">
@@ -390,14 +492,35 @@
 
 <hr class="divider">
 
+<!-- EXPERIENCE -->
+<section id="experience" class="reveal">
+  <div class="section-label">Where I've worked</div>
+  <h2>Experience</h2>
+  <p class="section-intro">Currently applying machine learning fundamentals in a live, remote engineering internship.</p>
+  <div class="exp-timeline">
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-date">Jul 2026 – Aug 2026 · Remote</div>
+      <div class="exp-title">Machine Learning Engineering Intern</div>
+      <div class="exp-org">FlyRank AI</div>
+      <div class="exp-desc">
+        Onboarded into a structured ML engineering internship combining AI fluency, prompt engineering, and applied machine learning training tracks.<br><br>
+        Ran and experimented with starter Jupyter notebooks to get hands-on with the team's ML workflow and tooling, and scoped a research question and provisional project lane for an ongoing capstone centered on Google Search Ranking and discoverability.
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
 <!-- PROJECTS -->
-<section id="projects">
+<section id="projects" class="reveal">
   <div class="section-label">What I've built</div>
   <h2>Projects</h2>
   <p class="section-intro">Production-grade projects shipped end-to-end — from architecture to deployment.</p>
-  <div class="projects-grid">
+  <div class="projects-grid reveal-stagger">
 
-    <div class="project-card">
+    <div class="project-card stagger-child">
       <div class="project-banner">
         <div class="project-banner-text">DevSure</div>
         <div class="project-badge">Final Year Project</div>
@@ -414,15 +537,15 @@
           <span class="tech-pill">AWS</span>
         </div>
         <ul class="project-highlights">
+          <li>Designed, built, and deployed the platform end-to-end over a 12-month cycle, hosted on AWS with 99%+ uptime during testing</li>
+          <li>Implemented 4 core modules from scratch: Authentication, AI Interview Engine, Feedback & Analytics Dashboard, Performance History Tracker</li>
           <li>Engineered a Confidence Scoring Engine quantifying performance across multiple behavioral signals</li>
-          <li>Architected core modules: Auth, AI Interview Session, Feedback Dashboard, Performance History</li>
-          <li>Integrated real-time session tracking for longitudinal behavioral analysis</li>
-          <li>Built full-stack — front-end UI, ML pipeline, and cloud-integrated backend</li>
+          <li>Applied OOP principles and consistent coding standards across 10,000+ lines of code, enabling new features with zero regressions</li>
         </ul>
       </div>
     </div>
 
-    <div class="project-card">
+    <div class="project-card stagger-child">
       <div class="project-banner" style="background: linear-gradient(135deg, rgba(20,184,166,0.15) 0%, rgba(99,102,241,0.1) 100%);">
         <div class="project-banner-text" style="color: var(--teal);">JobBoard</div>
         <div class="project-badge" style="background: rgba(20,184,166,0.15); color: var(--teal); border-color: rgba(20,184,166,0.3);">2024</div>
@@ -450,7 +573,7 @@
 <hr class="divider">
 
 <!-- EDUCATION & CERTS -->
-<section>
+<section class="reveal">
   <div class="section-label">Background</div>
   <h2>Education & Certifications</h2>
   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem;">
@@ -469,15 +592,22 @@
       </div>
     </div>
     <div>
-      <div class="cert-grid" style="grid-template-columns: 1fr;">
-        <div class="cert-card">
+      <div class="cert-grid reveal-stagger" style="grid-template-columns: 1fr;">
+        <div class="cert-card stagger-child">
+          <div class="cert-icon">🤖</div>
+          <div>
+            <div class="cert-name">AI For Everyone</div>
+            <div class="cert-provider">DeepLearning.AI / Coursera · Jul 2025</div>
+          </div>
+        </div>
+        <div class="cert-card stagger-child">
           <div class="cert-icon">🎨</div>
           <div>
             <div class="cert-name">Designing a Low-Fidelity Prototype in Figma</div>
             <div class="cert-provider">Coursera · Sep 2023</div>
           </div>
         </div>
-        <div class="cert-card">
+        <div class="cert-card stagger-child">
           <div class="cert-icon">🐍</div>
           <div>
             <div class="cert-name">Python Fundamentals for Beginners</div>
@@ -492,7 +622,7 @@
 <hr class="divider">
 
 <!-- CONTACT -->
-<section id="contact">
+<section id="contact" class="reveal">
   <div class="contact-grid">
     <div>
       <div class="section-label">Let's connect</div>
@@ -523,6 +653,81 @@
 <footer>
   <p>Ayesha Hassan · Software Engineer · Lahore, Pakistan · 2026</p>
 </footer>
+
+<script>
+  // Cursor spotlight
+  const spotlight = document.getElementById('spotlight');
+  document.addEventListener('mousemove', (e) => {
+    spotlight.style.opacity = '1';
+    spotlight.style.left = e.clientX + 'px';
+    spotlight.style.top = e.clientY + 'px';
+  });
+  document.addEventListener('mouseleave', () => { spotlight.style.opacity = '0'; });
+
+  // Scroll reveal + staggered children
+  const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach((el) => io.observe(el));
+
+  // Stagger child delays
+  document.querySelectorAll('.reveal-stagger').forEach((group) => {
+    const children = group.querySelectorAll('.stagger-child');
+    children.forEach((child, i) => {
+      child.style.transitionDelay = (i * 90) + 'ms';
+    });
+  });
+
+  // Animated number counters
+  const counters = document.querySelectorAll('.stat-number');
+  const counterIO = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseInt(el.getAttribute('data-count'), 10);
+      const suffix = el.getAttribute('data-suffix') || '';
+      const duration = 1400;
+      const start = performance.now();
+      function tick(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(eased * target).toLocaleString() + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      counterIO.unobserve(el);
+    });
+  }, { threshold: 0.4 });
+  counters.forEach((c) => counterIO.observe(c));
+
+  // Magnetic tilt on project cards
+  document.querySelectorAll('.project-card').forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const rotateX = ((y / rect.height) - 0.5) * -6;
+      const rotateY = ((x / rect.width) - 0.5) * 6;
+      card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1200px) rotateX(0) rotateY(0) translateY(0)';
+    });
+  });
+
+  // Respect reduced motion
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.reveal, .reveal-stagger, .stagger-child').forEach((el) => {
+      el.style.transition = 'none'; el.classList.add('visible');
+    });
+  }
+</script>
 
 </body>
 </html>
