@@ -3,7 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ayesha Hassan — Software Engineer</title>
+<title>Ayesha Hassan | Software Developer</title>
+<meta name="description" content="Ayesha Hassan is a Computer Science graduate and software developer in Lahore, building full stack web applications and AI powered systems with Python, React, Node.js, MongoDB, and AWS.">
+<meta name="theme-color" content="#0A0E1A">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ayesha Hassan | Software Developer">
+<meta property="og:description" content="Full stack and AI projects built end to end with Python, React, Node.js, MongoDB, and AWS.">
+<meta property="og:url" content="https://ayesha0002.github.io/portfolio-dev/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230A0E1A'/%3E%3Ctext x='50' y='65' font-size='44' font-family='Arial' font-weight='700' text-anchor='middle' fill='%23818CF8'%3EAH%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -362,25 +371,59 @@
     nav { padding: 1rem; }
     .nav-links { gap: 1rem; }
   }
+
+  /* ANCHORS, FOCUS, A11Y */
+  .hero, section { scroll-margin-top: 72px; }
+  a:focus-visible { outline: 2px solid var(--accent2); outline-offset: 3px; border-radius: 6px; }
+  .skip-link {
+    position: absolute; left: 1rem; top: -4rem; z-index: 200;
+    background: var(--accent); color: #fff; padding: 0.6rem 1rem;
+    border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.85rem;
+    transition: top 0.2s;
+  }
+  .skip-link:focus { top: 1rem; }
+
+  .hero-ctas { gap: 0.75rem; }
+  .hero-ctas .btn-primary, .hero-ctas .btn-outline { padding: 0.75rem 1.25rem; }
+
+  /* EDUCATION GRID */
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem; }
+  @media (max-width: 768px) { .edu-grid { grid-template-columns: 1fr; gap: 2rem; } }
+  @media (max-width: 520px) {
+    nav { padding: 0.8rem 1rem; }
+    .nav-links { gap: 0.8rem; }
+    .nav-links a { font-size: 0.78rem; }
+    section { padding: 4rem 1.25rem; }
+    .hero { padding: 6.5rem 1.25rem 3rem; }
+  }
+
+  /* REDUCED MOTION */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal, .stagger-child { opacity: 1 !important; transform: none !important; }
+  }
 </style>
+<noscript><style>.reveal, .stagger-child { opacity: 1 !important; transform: none !important; }</style></noscript>
 </head>
 <body>
+<a href="#main" class="skip-link">Skip to content</a>
 
-<div class="aurora"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
-<div class="grain"></div>
-<div class="spotlight" id="spotlight"></div>
+<div class="aurora" aria-hidden="true"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="spotlight" id="spotlight" aria-hidden="true"></div>
 
-<nav>
+<nav aria-label="Primary">
   <a href="#" class="nav-logo">AH<span>.</span></a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
+    <li><a href="#fellowship">Fellowship</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
+<main id="main">
 <!-- HERO -->
 <div class="hero" id="about">
   <div class="hero-grid">
@@ -388,14 +431,15 @@
       <div class="hero-eyebrow">Available for opportunities</div>
       <h1>
         <span class="gradient-text">Ayesha Hassan</span>
-        <span class="line2">Software Engineer<span class="typed-cursor"></span></span>
+        <span class="line2">Software Developer<span class="typed-cursor" aria-hidden="true"></span></span>
       </h1>
       <p class="hero-desc">
-        Computer Science graduate building full-stack web applications and AI-powered systems. Currently a Machine Learning Engineering Intern at FlyRank AI, with hands-on experience across the MERN stack, Python, MongoDB, and AWS — from responsive front-end interfaces to cloud-deployed backends.
+        Computer Science graduate building full stack web applications and AI powered systems. Hands on experience across Python, the MERN stack, MongoDB, and AWS, from responsive front end interfaces to cloud deployed backends. Currently completing the McKinsey Forward fellowship.
       </p>
       <div class="hero-ctas">
         <a href="#projects" class="btn-primary">View Projects ↓</a>
         <a href="mailto:ayeshassan002@gmail.com" class="btn-outline">Get in Touch</a>
+        <a href="Ayesha_Hassan_Resume.pdf" class="btn-outline" download>Download Resume</a>
       </div>
     </div>
     <div class="hero-visual">
@@ -411,7 +455,7 @@
         </div>
         <div class="float-badge badge2">
           <div class="dot"></div>
-          ML Intern @ FlyRank AI
+          McKinsey Forward Fellow
         </div>
       </div>
     </div>
@@ -419,10 +463,10 @@
 </div>
 
 <div class="stats-bar reveal-stagger">
-  <div class="stat-box stagger-child"><div class="stat-number" data-count="12">0</div><div class="stat-label">Month build cycle</div></div>
-  <div class="stat-box stagger-child"><div class="stat-number" data-count="99" data-suffix="%+">0</div><div class="stat-label">Uptime in testing</div></div>
-  <div class="stat-box stagger-child"><div class="stat-number" data-count="10000" data-suffix="+">0</div><div class="stat-label">Lines shipped</div></div>
-  <div class="stat-box stagger-child"><div class="stat-number" data-count="4">0</div><div class="stat-label">Core modules built</div></div>
+  <div class="stat-box stagger-child"><div class="stat-number" data-count="12">12</div><div class="stat-label">Month build cycle</div></div>
+  <div class="stat-box stagger-child"><div class="stat-number" data-count="99" data-suffix="%+">99%+</div><div class="stat-label">Uptime in testing</div></div>
+  <div class="stat-box stagger-child"><div class="stat-number" data-count="10000" data-suffix="+">10,000+</div><div class="stat-label">Lines shipped</div></div>
+  <div class="stat-box stagger-child"><div class="stat-number" data-count="4">4</div><div class="stat-label">Core modules built</div></div>
 </div>
 
 <hr class="divider">
@@ -431,7 +475,7 @@
 <section id="skills" class="reveal">
   <div class="section-label">What I work with</div>
   <h2>Technical Skills</h2>
-  <p class="section-intro">Focused on full-stack development and software engineering, with hands-on experience shipping production-grade applications.</p>
+  <p class="section-intro">Focused on Python, full stack development, and AI, with hands on experience shipping complete applications from architecture to deployment.</p>
   <div class="skills-grid reveal-stagger">
     <div class="skill-card stagger-child">
       <div class="skill-icon">🧠</div>
@@ -463,6 +507,7 @@
         <span class="tag">HTML5</span>
         <span class="tag">CSS3</span>
         <span class="tag">REST APIs</span>
+        <span class="tag">FastAPI</span>
       </div>
     </div>
     <div class="skill-card stagger-child">
@@ -492,20 +537,19 @@
 
 <hr class="divider">
 
-<!-- EXPERIENCE -->
-<section id="experience" class="reveal">
-  <div class="section-label">Where I've worked</div>
-  <h2>Experience</h2>
-  <p class="section-intro">Currently applying machine learning fundamentals in a live, remote engineering internship.</p>
+<!-- FELLOWSHIP -->
+<section id="fellowship" class="reveal">
+  <div class="section-label">Beyond the code</div>
+  <h2>Fellowship</h2>
+  <p class="section-intro">Building professional and problem solving skills alongside my technical work.</p>
   <div class="exp-timeline">
     <div class="exp-item">
       <div class="exp-dot"></div>
-      <div class="exp-date">Jul 2026 – Aug 2026 · Remote</div>
-      <div class="exp-title">Machine Learning Engineering Intern</div>
-      <div class="exp-org">FlyRank AI</div>
+      <div class="exp-date">2026 to Present</div>
+      <div class="exp-title">McKinsey Forward Program</div>
+      <div class="exp-org">Fellowship</div>
       <div class="exp-desc">
-        Onboarded into a structured ML engineering internship combining AI fluency, prompt engineering, and applied machine learning training tracks.<br><br>
-        Ran and experimented with starter Jupyter notebooks to get hands-on with the team's ML workflow and tooling, and scoped a research question and provisional project lane for an ongoing capstone centered on Google Search Ranking and discoverability.
+        Currently completing McKinsey's Forward program, a structured learning fellowship focused on building professional and problem solving skills alongside my technical work.
       </div>
     </div>
   </div>
@@ -517,7 +561,7 @@
 <section id="projects" class="reveal">
   <div class="section-label">What I've built</div>
   <h2>Projects</h2>
-  <p class="section-intro">Production-grade projects shipped end-to-end — from architecture to deployment.</p>
+  <p class="section-intro">Projects built end to end, from architecture to deployment.</p>
   <div class="projects-grid reveal-stagger">
 
     <div class="project-card stagger-child">
@@ -526,8 +570,8 @@
         <div class="project-badge">Final Year Project</div>
       </div>
       <div class="project-body">
-        <h3>DevSure — AI-Powered Mock Interview System</h3>
-        <p>An end-to-end AI platform that conducts real-time candidate assessment using computer vision — analyzing facial expressions, posture, and behavioral signals to generate structured feedback reports.</p>
+        <h3>DevSure: AI Powered Mock Interview System</h3>
+        <p>An end to end AI platform that conducts real time candidate assessment using computer vision, analyzing facial expressions, posture, and behavioral signals to generate structured feedback reports.</p>
         <div class="project-techs">
           <span class="tech-pill">Python</span>
           <span class="tech-pill">Computer Vision</span>
@@ -537,7 +581,7 @@
           <span class="tech-pill">AWS</span>
         </div>
         <ul class="project-highlights">
-          <li>Designed, built, and deployed the platform end-to-end over a 12-month cycle, hosted on AWS with 99%+ uptime during testing</li>
+          <li>Designed, built, and deployed the platform end to end over a 12 month cycle, hosted on AWS with 99%+ uptime during testing</li>
           <li>Implemented 4 core modules from scratch: Authentication, AI Interview Engine, Feedback & Analytics Dashboard, Performance History Tracker</li>
           <li>Engineered a Confidence Scoring Engine quantifying performance across multiple behavioral signals</li>
           <li>Applied OOP principles and consistent coding standards across 10,000+ lines of code, enabling new features with zero regressions</li>
@@ -552,7 +596,7 @@
       </div>
       <div class="project-body">
         <h3>Freelance Job Board Interface</h3>
-        <p>A full-stack job listing platform with dual user roles — job seekers and employers — featuring real-time data sync, secure authentication, and a clean responsive UI.</p>
+        <p>A full stack job listing platform with dual user roles, job seekers and employers, featuring real time data sync, secure authentication, and a clean responsive UI.</p>
         <div class="project-techs">
           <span class="tech-pill">React.js</span>
           <span class="tech-pill">Firebase Firestore</span>
@@ -561,7 +605,7 @@
         </div>
         <ul class="project-highlights">
           <li>Dual role access control for job seekers and employers</li>
-          <li>Real-time data sync via Firebase Firestore</li>
+          <li>Real time data sync via Firebase Firestore</li>
           <li>Secure authentication and responsive, accessible UI</li>
         </ul>
       </div>
@@ -576,7 +620,7 @@
 <section class="reveal">
   <div class="section-label">Background</div>
   <h2>Education & Certifications</h2>
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem;">
+  <div class="edu-grid">
     <div>
       <div class="exp-timeline">
         <div class="exp-item">
@@ -628,7 +672,7 @@
       <div class="section-label">Let's connect</div>
       <div class="contact-big">Open to<br><span>Software &amp; Dev</span><br>opportunities</div>
       <p style="color: var(--muted); font-size: 0.9rem; max-width: 340px;">
-        Currently seeking internships and junior roles in software engineering and full-stack development. Based in Lahore, open to remote.
+        Currently seeking internships and junior roles in software development, Python, and AI. Based in Lahore, open to remote.
       </p>
     </div>
     <div>
@@ -637,9 +681,13 @@
           <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
           ayeshassan002@gmail.com
         </a>
-        <a href="https://linkedin.com/in/ayesha-hassann" target="_blank" class="contact-link">
+        <a href="https://linkedin.com/in/ayesha-hassann" target="_blank" rel="noopener noreferrer" class="contact-link">
           <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
           linkedin.com/in/ayesha-hassann
+        </a>
+        <a href="https://github.com/ayesha0002" target="_blank" rel="noopener noreferrer" class="contact-link">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          github.com/ayesha0002
         </a>
         <a href="tel:+923311338600" class="contact-link">
           <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
@@ -650,8 +698,10 @@
   </div>
 </section>
 
+</main>
+
 <footer>
-  <p>Ayesha Hassan · Software Engineer · Lahore, Pakistan · 2026</p>
+  <p>Ayesha Hassan · Software Developer · Lahore, Pakistan · 2026</p>
 </footer>
 
 <script>
