@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ayesha Hassan | Software Developer</title>
+<title>Ayesha Hassan | Computer Science Graduate | Software Developer</title>
 <meta name="description" content="Ayesha Hassan is a Computer Science graduate and software developer in Lahore, building full stack web applications and AI powered systems with Python, React, Node.js, MongoDB, and AWS.">
 <meta name="theme-color" content="#0A0E1A">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Ayesha Hassan | Software Developer | Computer Science Graduate">
+<meta property="og:title" content="Ayesha Hassan | Computer Science Graduate | Software Developer">
 <meta property="og:description" content="Full stack and AI projects built end to end with Python, React, Node.js, MongoDB, and AWS.">
 <meta property="og:url" content="https://ayesha0002.github.io/portfolio-dev/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230A0E1A'/%3E%3Ctext x='50' y='65' font-size='44' font-family='Arial' font-weight='700' text-anchor='middle' fill='%23818CF8'%3EAH%3C/text%3E%3C/svg%3E">
@@ -103,7 +103,7 @@
     max-width: 1100px; margin: 0 auto;
     position: relative;
   }
-  .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; width: 100%; }
+  .hero-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 4rem; align-items: center; width: 100%; }
   .hero-eyebrow {
     font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em;
     color: var(--accent2); text-transform: uppercase; margin-bottom: 1rem;
@@ -123,7 +123,8 @@
     animation: shine 6s linear infinite;
   }
   @keyframes shine { to { background-position: -300% center; } }
-  h1 .line2 { color: var(--accent2); display: block; position: relative; }
+  h1 .line2 { color: var(--accent2); display: block; position: relative; font-size: clamp(1.1rem, 1.7vw, 1.4rem); line-height: 1.3; letter-spacing: -0.015em; margin-top: 0.6rem; }
+  .nowrap { white-space: nowrap; }
   .typed-cursor { display: inline-block; width: 3px; height: 0.85em; background: var(--accent2); margin-left: 4px; vertical-align: middle; animation: blink 0.9s step-end infinite; }
   @keyframes blink { 50% { opacity: 0; } }
   .hero-desc { font-size: 1.05rem; color: var(--muted); max-width: 480px; margin-bottom: 2rem; line-height: 1.75; }
@@ -383,9 +384,6 @@
   }
   .skip-link:focus { top: 1rem; }
 
-  .hero-ctas { gap: 0.75rem; }
-  .hero-ctas .btn-primary, .hero-ctas .btn-outline { padding: 0.75rem 1.25rem; }
-
   /* EDUCATION GRID */
   .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem; }
   @media (max-width: 768px) { .edu-grid { grid-template-columns: 1fr; gap: 2rem; } }
@@ -431,7 +429,7 @@
       <div class="hero-eyebrow">Available for opportunities</div>
       <h1>
         <span class="gradient-text">Ayesha Hassan</span>
-        <span class="line2">Software Developer<span class="typed-cursor" aria-hidden="true"></span></span>
+        <span class="line2"><span class="nowrap">Computer Science Graduate |</span> <span class="nowrap">Software Developer</span><span class="typed-cursor" aria-hidden="true"></span></span>
       </h1>
       <p class="hero-desc">
         Computer Science graduate building full stack web applications and AI powered systems. Hands on experience across Python, the MERN stack, MongoDB, and AWS, from responsive front end interfaces to cloud deployed backends. Currently completing the McKinsey Forward fellowship.
@@ -439,7 +437,6 @@
       <div class="hero-ctas">
         <a href="#projects" class="btn-primary">View Projects ↓</a>
         <a href="mailto:ayeshassan002@gmail.com" class="btn-outline">Get in Touch</a>
-        <a href="Ayesha_Hassan_Resume.pdf" class="btn-outline" download>Download Resume</a>
       </div>
     </div>
     <div class="hero-visual">
@@ -701,7 +698,7 @@
 </main>
 
 <footer>
-  <p>Ayesha Hassan · Software Developer · Lahore, Pakistan · 2026</p>
+  <p>Ayesha Hassan · Computer Science Graduate | Software Developer · Lahore, Pakistan · 2026</p>
 </footer>
 
 <script>
